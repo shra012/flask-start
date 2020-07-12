@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block content%}
+<div class="container">
+  {% if len(cart_items) == 0 %}
+  <h2>Shopping Cart</h2>
+  <blockquote class="blockquote text-center">
+    <p class="mb-0">Your Shopping Cart is empty.</p>
+    <footer class="blockquote-footer">
+      You have no items in the cart. To buy one or more now, click "Buy Now or
+      Add to cart" in the item.
+    </footer>
+  </blockquote>
+  {% endif%} {% for cart_item in cart_items%}
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img
+          src="{{url_for('static',filename=cart_item.item_image_name)}}"
+          class="card-img"
+          alt="{{cart_item.item_name}}"
+        />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{cart_item.item_name}}</h5>
+          <p class="card-text">
+            {{cart_item.details}}
+          </p>
+          <a
+            href="{{url_for('cart_controller.delete_item',id=cart_item.id)}}"
+            class="btn btn-outline-danger btn-sm"
+            >delete</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

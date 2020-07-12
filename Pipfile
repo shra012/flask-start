@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+autopep8 = "*"
+
+[packages]
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+email_validator= "*" # This needs to be imported for email validation.
+flask-dance = "*"
+ibm_db_sa = "*"
+sqlalchemy-utils = "*"
+flask-security = "*"

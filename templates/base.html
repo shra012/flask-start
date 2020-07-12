@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function () {
+        $('.toast').toast('show');
+        $( ".shakeInput" ).effect( "shake" );
+      });
+    </script>
+  </head>
+  <body>
+    <div id="navigation">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{url_for('home_page')}}">Learn & Earn</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Important Items</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Shop By Category
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Mobiles</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Computers</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">TV Appliances</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+          <div class="pr-2"></div>
+          <button
+            type="button"
+            class="btn btn-outline-success my-2 my-sm-0"
+            onclick="window.location.href = '{{ url_for('cart_controller.cart') }}'"
+            type="submit"
+          >
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+              class="bi bi-cart"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+              />
+            </svg>
+            Cart
+          </button>
+          <div class="pr-2"></div>
+            {% if current_user.is_authenticated %}
+                <div class="nav-item dropdown" style="padding-right: 20px;padding-left: 20px;">
+                      <a
+                        class="nav-link dropdown-toggle btn btn-outline-success btn-sm rounded-pill"
+                        href="#"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+
+                      >
+                        Hi, {{ current_user.username.upper()[:5] }}
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Your Orders</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                      </div>
+                </div>
+            {% else %}
+          <button
+            type="button"
+            class="btn btn-outline-success my-2 my-sm-0"
+            onclick="window.location.href = '{{ url_for('login_page') }}'"
+            type="submit"
+          >
+            Login
+          </button>
+            {% endif %}
+        </div>
+      </nav>
+    </div>
+    {% block content %} {% endblock %}
+    <div id="footer">
+      <!-- Footer -->
+      <footer class="page-footer font-small bg-secondary text-white pt-4">
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+          <!-- Grid row -->
+          <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+              <!-- Content -->
+              <h6 class="text-uppercase">Learn and Earn</h6>
+              <p>
+                Please like us, share about us, and follow us on social media.
+              </p>
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none pb-3" />
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+              <!-- Links -->
+              <h6 class="text-uppercase">Connect with Us</h6>
+
+              <ul class="list-unstyled">
+                <li>
+                  <a class="text-light font-weight-light small" href="#!"
+                    >Facebook</a
+                  >
+                </li>
+                <li>
+                  <a class="text-light font-weight-light small" href="#!"
+                    >Twitter</a
+                  >
+                </li>
+                <li>
+                  <a class="text-light font-weight-light small" href="#!"
+                    >Instagram</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+              <!-- Links -->
+              <h6 class="text-uppercase">Get to Know Us</h6>
+
+              <ul class="list-unstyled">
+                <li>
+                  <a class="text-light font-weight-light small" href="#!"
+                    >News</a
+                  >
+                </li>
+                <li>
+                  <a class="text-light font-weight-light small" href="#!"
+                    >About Us</a
+                  >
+                </li>
+                <li>
+                  <a class="text-light font-weight-light small" href="#!"
+                    >Contact Us</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+          © 2020 Copyright:
+          <a
+            class="text-light font-weight-light"
+            href="{{url_for('home_page')}}"
+          >
+            learnandearn.com</a
+          >
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <!-- Footer -->
+    </div>
+  </body>
+</html>

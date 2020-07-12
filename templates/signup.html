@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% from "form_macros.html" import render_info_input_field %}
+{% block content %}
+    <h3 class="text-center pt-5"></h3>
+    <div class="container">
+        <div id="signup-row" class="row justify-content-center align-items-center">
+            <div id="signup-column" class="col-md-6">
+                <div id="signup-box" class="col-md-12">
+                    <div>
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category,message in messages %}
+                                    <h6 class="shakeInput {% if category == 'error' %} text-danger {% else %} text-success {% endif %} text-center ">{{ message }}</h6>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <form id="signup-form" class="form border border-info p-4 rounded bg-light shadow"
+                          action="{{ url_for('signup_page') }}" method="post">
+                        {{ form.csrf_token }}
+                        <h3 class="text-center text-info">Sign Up</h3>
+                        {{ render_info_input_field(form.username) }}
+                        {{ render_info_input_field(form.email) }}
+                        {{ render_info_input_field(form.password) }}
+                        {{ render_info_input_field(form.confirm) }}
+                        <div {% if form.signup.errors %} class="error form-group" {% else %}
+                                                         class="form-group" {% endif %}>
+                            {{ form.signup(class="btn btn-info btn-md") }}
+                        </div>
+                        <div id="register-link" class="text-right">
+                            <span class="text-info">
+                                Already part of our users ?
+                                <a href="{{ url_for('login_page') }}" class="text-info">Login</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 class="text-center pt-5"></h3>
+{% endblock %}
