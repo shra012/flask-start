@@ -131,3 +131,5 @@ dmypy.json
 # Personal Ignore
 .DS_Store
 .vscode/
+.idea/
+static/
