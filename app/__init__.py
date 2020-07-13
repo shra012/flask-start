@@ -4,11 +4,11 @@ from flask_wtf.csrf import CSRFProtect
 from .model import db, login_manager
 from .controllers.cart_controller import cart_controller
 from .controllers.mobile_controller import mobile_controller
-from .controllers import google_controller
+from .controllers import google_controller, github_controller, facebook_controller
 from .cli import add_cli_methods
 from .config import Config
 from .basic_routes import bootstrap_basic_routes
-from .oauth import register_oauth
+from .oauth import register_google_oauth,register_facebook_oauth
 
 
 def bootstrap_wtf_csrf(app):
@@ -20,6 +20,8 @@ def bootstrap_blueprints(app):
     app.register_blueprint(mobile_controller, url_prefix='/mobile')
     app.register_blueprint(cart_controller, url_prefix='/cart')
     app.register_blueprint(google_controller, url_prefix='/login')
+    app.register_blueprint(github_controller, url_prefix='/login')
+    app.register_blueprint(facebook_controller, url_prefix='/login')
 
 
 def create_app():
@@ -36,5 +38,6 @@ def create_app():
     bootstrap_basic_routes(app)
     bootstrap_blueprints(app)
     add_cli_methods(app)
-    register_oauth(google_controller)
+    register_google_oauth(google_controller)
+    register_facebook_oauth(facebook_controller)
     return app

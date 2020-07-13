@@ -15,6 +15,8 @@ class Config(object):
     GOOGLE_OAUTH_CLIENT_ID = os.getenv("GOOGLE_OAUTH_CLIENT_ID")  # For Google OAuth2
     GOOGLE_OAUTH_CLIENT_SECRET = os.getenv("GOOGLE_OAUTH_CLIENT_SECRET")  # For Google OAuth2
     OAUTHLIB_RELAX_TOKEN_SCOPE = os.getenv(
-        "OAUTHLIB_RELAX_TOKEN_SCOPE")  # For Google OAuth2 in local if scope is mismatched
+        "OAUTHLIB_RELAX_TOKEN_SCOPE")  # For OAuth2 in local if any scope is mismatched
     OAUTHLIB_INSECURE_TRANSPORT = os.getenv(
-        "OAUTHLIB_INSECURE_TRANSPORT")  # For Google OAuth2 in local since we use http and not https
+        "OAUTHLIB_INSECURE_TRANSPORT")  # For OAuth2 in local since we use http and not https
+    FACEBOOK_OAUTH_CLIENT_ID = os.environ.get("FACEBOOK_OAUTH_CLIENT_ID")  # For facebook OAuth2
+    FACEBOOK_OAUTH_CLIENT_SECRET = os.environ.get("FACEBOOK_OAUTH_CLIENT_SECRET")  # For facebook OAuth2

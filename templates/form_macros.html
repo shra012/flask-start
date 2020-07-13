@@ -2,7 +2,7 @@
     <div class="form-group">
         {% if field.errors %}
             {{ field.label(class = 'text-danger') }}
-            {{ field(class='form-control border-danger', **kwargs)|safe }}
+            {{ field(class='form-control border-danger')|safe }}
             <div class="text-danger">
                 <ul>
                     {% for error in field.errors %}
@@ -12,7 +12,7 @@
             </div>
         {% else %}
             {{ field.label(class='text-info') }}
-            {{ field(class='form-control', **kwargs)|safe }}
+            {{ field(class='form-control')|safe }}
         {% endif %}
     </div>
 {% endmacro %}

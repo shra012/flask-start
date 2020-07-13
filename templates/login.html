@@ -41,14 +41,16 @@
                                 <hr>
                             </div>
                              <div>
-                                 <p class="text-info">or continue with</p>
+                                 <p class="text-info text-center">or continue with</p>
                             </div>
                              <div>
                                  <hr>
                             </div>
                         </div>
-                        <div>
+                        <div class="row row-cols-1 row-cols-md-3">
                             <a class="btn btn-outline-*" href="{{ url_for("google.login") }}"><img src="{{ url_for('static',filename='google_oauth_logo.png')}}" height="60" alt="Google_Oauth_Image"></a>
+                            <a class="btn btn-outline-*" href="{{ url_for("facebook.login") }}"><img src="{{ url_for('static',filename='facebook_oauth_logo.png')}}" height="60" alt="Facebook_Oauth_Image"></a>
+                            <a class="btn btn-outline-*" href="{{ url_for("github.login") }}"><img class="p-2" src="{{ url_for('static',filename='github_oauth_logo.png')}}" height="60" alt="Github_Oauth_Image"></a>
                         </div>
                     </form>
                 </div>
