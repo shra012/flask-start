@@ -26,7 +26,7 @@ def bootstrap_basic_routes(app):
         form = LoginForm()
         if form.validate_on_submit():
             user = User.query.filter_by(username=form.username.data).first()
-            if user is not None:
+            if user is not None and user.password == form.password.data:
                 login_user(user=user, remember=form.remember_me.data, duration=timedelta(hours=24))
                 if not form.remember_me.data:
                     session.permanent = True
