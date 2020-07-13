@@ -46,7 +46,7 @@ set PORT=5000
 
 - Install python from vscode extensions market place (ctrl+shift+x) [ms-python.python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 - Open the command palette in visual studio (ctrl+shift+P) type `>Python: Select Interpreter`
-- Choose the python interpreter of virtual env `('example-flask': pipenv)`
+- Choose the python interpreter of virtual env `('flask-start': pipenv)`
 - Once that is done check the .vscode folder settings.json if the `python.pythonPath` points to your virtual env.
 - To debug the applictaion open Run (ctrl+shift+D) and click on the play button besided Run with Python: Flask selected in the drop down.
 
