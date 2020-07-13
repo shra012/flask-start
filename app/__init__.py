@@ -8,7 +8,7 @@ from .controllers import google_controller, github_controller, facebook_controll
 from .cli import add_cli_methods
 from .config import Config
 from .basic_routes import bootstrap_basic_routes
-from .oauth import register_google_oauth,register_facebook_oauth
+from .oauth import register_oauth
 
 
 def bootstrap_wtf_csrf(app):
@@ -22,6 +22,12 @@ def bootstrap_blueprints(app):
     app.register_blueprint(google_controller, url_prefix='/login')
     app.register_blueprint(github_controller, url_prefix='/login')
     app.register_blueprint(facebook_controller, url_prefix='/login')
+
+
+def register_oauth_controllers():
+    register_oauth(google_controller)
+    register_oauth(facebook_controller)
+    register_oauth(github_controller)
 
 
 def create_app():
@@ -38,6 +44,5 @@ def create_app():
     bootstrap_basic_routes(app)
     bootstrap_blueprints(app)
     add_cli_methods(app)
-    register_google_oauth(google_controller)
-    register_facebook_oauth(facebook_controller)
+    register_oauth_controllers()
     return app
