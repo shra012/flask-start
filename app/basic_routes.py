@@ -1,5 +1,5 @@
 from flask import render_template, abort, redirect, url_for, flash, request, session
-from flask_login import login_user,logout_user
+from flask_login import login_user, logout_user
 from datetime import timedelta
 
 from .forms.wft_forms import LoginForm, SignUpForm
@@ -37,13 +37,23 @@ def bootstrap_basic_routes(app):
     @app.route('/signup', methods=["GET", "POST"])
     def signup_page():
         form = SignUpForm()
+
         if form.validate_on_submit():
-            user = User(username=form.username.data, password=form.password.data, email=form.email.data)
-            if user is not None:
-                db.session.add(user)
-                db.session.commit()
-                flash(f'Sign Up Successfully for {user.username} Please Log In', 'success')
-                return redirect(request.args.get('next') or url_for("login_page"))
+            user_by_username = None
+            user_by_email = None
+            try:
+                user_by_username = User.query.filter_by(username=form.username.data).one()
+                user_by_email = User.query.filter_by(email=form.email.data).one()
+            except Exception as e:
+                pass
+
+            if not user_by_email and not user_by_username:
+                user = User(username=form.username.data, password=form.password.data, email=form.email.data)
+                if user is not None:
+                    db.session.add(user)
+                    db.session.commit()
+                    flash(f'Sign Up Successfully for {user.username} Please Log In', 'success')
+                    return redirect(request.args.get('next') or url_for("login_page"))
             flash('Please use a different  Username / Email Id.', 'error')
         return render_template("signup.html", form=form)
 

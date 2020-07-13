@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% from "form_macros.html" import render_info_input_field %}
-{% block content%}
-<h3 class="text-center pt-5"></h3>
+{% block content %}
+    <h3 class="text-center pt-5"></h3>
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
                 <div id="login-box" class="col-md-12">
-                     <div>
+                    <div>
                         {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
                                 {% for category,message in messages %}
@@ -15,27 +15,45 @@
                             {% endif %}
                         {% endwith %}
                     </div>
-                    <form id="login-form" class="form border border-info p-4 rounded bg-light shadow" action="{{url_for('login_page')}}" method="post">
+                    <form id="login-form" class="form border border-info p-4 rounded bg-light shadow"
+                          action="{{ url_for('login_page') }}" method="post">
                         {{ form.csrf_token }}
                         <h3 class="text-center text-info">Login</h3>
                         {{ render_info_input_field(form.username) }}
                         {{ render_info_input_field(form.password) }}
-                        <div {% if form.remember_me.errors %} class="error form-group" {% else %} class="form-group" {% endif %}>
-                            {{form.remember_me.label(class="text-info")}}<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{form.remember_me}}
+                        <div {% if form.remember_me.errors %} class="error form-group" {% else %}
+                                                              class="form-group" {% endif %}>
+                            {{ form.remember_me.label(class="text-info") }}<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{{ form.remember_me }}
                         </div>
-                        <div {% if form.submit.errors %} class="error form-group" {% else %} class="form-group" {% endif %}>
-                            {{form.submit(class="btn btn-info btn-md")}}
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                {{ form.submit(class="btn btn-info btn-md") }}
+                            </div>
+                             <div id="register-link" class="text-right col-sm-6">
+                                <span class="text-info">
+                                    Not part of our users ?
+                                    <a href="{{ url_for('signup_page') }}" class="text-info">Register here</a>
+                                </span>
+                            </div>
                         </div>
-                        <div id="register-link" class="text-right">
-                            <span class="text-info" >
-                                Not part of our users ?   
-                                <a href="{{ url_for('signup_page') }}" class="text-info">Register here</a>
-                            </span>
+                        <div class="row row-cols-1 row-cols-md-3">
+                            <div>
+                                <hr>
+                            </div>
+                             <div>
+                                 <p class="text-info">or continue with</p>
+                            </div>
+                             <div>
+                                 <hr>
+                            </div>
+                        </div>
+                        <div>
+                            <a class="btn btn-outline-*" href="{{ url_for("google.login") }}"><img src="{{ url_for('static',filename='google_oauth_logo.png')}}" height="60" alt="Google_Oauth_Image"></a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-<h3 class="text-center pt-5"></h3>
+    <h3 class="text-center pt-5"></h3>
 {% endblock %}

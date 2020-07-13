@@ -35,10 +35,14 @@ pipenv shell
 You can also set the enviroment variables explicity (OPTIONAL)
 
 ```cmd
+set FLASK_APP=app.py
+set FLASK_ENV=development
 set SECRET_KEY="SAMPLE_SECRET_KEY"
 set SQLALCHEMY_DATABASE_URI="ibm_db_sa://username:password@hostname:port/databasename"
 set GOOGLE_OAUTH_CLIENT_ID="OAuth Client Id"
 set GOOGLE_OAUTH_CLIENT_SECRET="OAuth Client Secret"
+set OAUTHLIB_INSECURE_TRANSPORT=True
+set OAUTHLIB_RELAX_TOKEN_SCOPE=True
 set PORT=5000
 ```
 
@@ -55,7 +59,7 @@ set PORT=5000
 **Start the app in virtual env shell**
 
 ```cmd
-python app.py
+flask run
 ```
 
 ## Usage

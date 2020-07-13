@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+from flask_dance.consumer.storage.sqla import OAuthConsumerMixin
 from sqlalchemy_utils import PasswordType
 from flask import current_app
 
@@ -29,9 +30,15 @@ class User(db.Model, UserMixin):
             ),
         ),
         unique=False,
-        nullable=False,
+        nullable=True,
     )
     email = db.Column(db.String(120), nullable=False, unique=True)
 
     def __repr__(self):
         return f'<User {self.id} {self.user_name} {self.email}>'
+
+
+class OAuth(OAuthConsumerMixin, db.Model):
+    provider_user_id = db.Column(db.String(256), unique=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
+    user = db.relationship(User)
