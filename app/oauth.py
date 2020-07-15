@@ -27,10 +27,10 @@ def register_oauth(blueprint):
             msg = "Failed to fetch user info."
             flash(msg, category="error")
             return False
-
         info = resp.json()
         user_id = info["id"]
-        username = info["email"].split("@")[0]
+        email = info["email"] if info["email"] is not None else f'{info["login"]}@github.com'
+        username = email.split("@")[0]
 
         # Find this OAuth token in the database, or create it
         query = OAuth.query.filter_by(provider=blueprint.name, provider_user_id=user_id)
@@ -43,7 +43,7 @@ def register_oauth(blueprint):
             login_user(oauth.user)
         else:
             # Create a new local user account for this user
-            user = User(email=info["email"], username=username)
+            user = User(email=email, username=username)
             # Associate the new local user account with the OAuth token
             oauth.user = user
             # Save and commit our database models
