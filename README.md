@@ -1,5 +1,5 @@
 # flask-start
-An example application with basic ecommerce UI.
+An example application with basic ecommerce UI. The project runs on flask and is deployed as a docker container in IBM Cloud Foundry. It uses github actions to deploy the code to CF and is backed by IBM DB2.
 
 ## Github Action Build Status
 
